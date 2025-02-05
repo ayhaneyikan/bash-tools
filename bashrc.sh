@@ -30,7 +30,7 @@ export PS1="\\n$(_color GREY)\D{%H:%M:%S} $(_color GREEN)\h $user$(_color L_PURP
 ##########################################
 
 export DEV_HOME=$HOME/dev
-export BASH_TOOLS_DIR=$(pwd $(cd $(dirname $BASH_SOURCE[0])))
+export BASH_TOOLS_DIR=$($(cd $(dirname $BASH_SOURCE[0])) && pwd)
 
 
 
