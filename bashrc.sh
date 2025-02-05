@@ -3,11 +3,11 @@
 ##########################################
 
 # parse git branch for use in commandline prompt
-_parse_git_branch() {
+function _parse_git_branch() {
   git branch 2> /dev/null | sed -n -e 's/^\* \(.*\)/\(\1\)/p'
 }
 # function to output desired color code
-_color() {
+function _color() {
   case $1 in
     GREY) echo -e "\[\033[38;5;8m\]" ;;
     GREEN) echo -e "\[\033[38;5;2m\]" ;;
@@ -21,7 +21,7 @@ _color() {
 # if root user, add indicator string to command line
 [ $(id -u) = 0 ] && user="$(color YELLOW)root " || user=""
 # set command line string
-export PS1="\\n$(color GREY)\D{%H:%M:%S} $(color GREEN)\h $user$(color L_PURPLE)\w $(color L_BLUE)\$(parse_git_branch)$(color GREY)\\n\$$(color RESET) "
+export PS1="\\n$(_color GREY)\D{%H:%M:%S} $(_color GREEN)\h $user$(_color L_PURPLE)\w $(_color L_BLUE)\$(_parse_git_branch)$(_color GREY)\\n\$$(_color RESET) "
 
 
 
