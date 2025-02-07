@@ -2,6 +2,11 @@
 alias ..='cd ..'
 alias b='cd -'
 
+# grep colors
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
 # podman aliases
 alias pi='podman images --sort repository'
 alias pp='podman ps -a'

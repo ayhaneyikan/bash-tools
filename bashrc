@@ -1,27 +1,36 @@
+# ~/.bashrc: executed by bash(1) for non-login shells.
+
 ##########################################
-# command line prompt
+# general setup
 ##########################################
 
-# parse git branch for use in commandline prompt
-function _parse_git_branch() {
-  git branch 2> /dev/null | sed -n -e 's/^\* \(.*\)/\(\1\)/p'
-}
-# function to output desired color code
-function _color() {
-  case $1 in
-    GREY) echo -e "\[\033[38;5;8m\]" ;;
-    GREEN) echo -e "\[\033[38;5;2m\]" ;;
-    YELLOW) echo -e "\[\033[38;5;3m\]" ;;
-    L_BLUE) echo -e "\[\033[38;5;6m\]" ;;
-    L_PURPLE) echo -e "\[\033[38;5;13m\]" ;;
-    RESET) echo -e "\[\033[0m\]" ;;
-  esac
-}
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
 
-# if root user, add indicator string to command line
-[ $(id -u) = 0 ] && user="$(color YELLOW)root " || user=""
-# set command line string
-export PS1="\\n$(_color GREY)\D{%H:%M:%S} $(_color GREEN)\h $user$(_color L_PURPLE)\w $(_color L_BLUE)\$(_parse_git_branch)$(_color GREY)\\n\$$(_color RESET) "
+# don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+HISTCONTROL=ignoreboth
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# If set, the pattern "**" used in a pathname expansion context will
+# match all files and zero or more directories and subdirectories.
+#shopt -s globstar
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 
 
@@ -40,3 +49,4 @@ export BASH_TOOLS_DIR=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
 
 source $BASH_TOOLS_DIR/aliases.sh
 source $BASH_TOOLS_DIR/functions.sh
+source $BASH_TOOLS_DIR/command_line.sh
