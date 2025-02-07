@@ -1,6 +1,6 @@
 # Personal Bash Tooling Setup
 
-**Quick start**: source `bashrc` in this repository OR create a symbolic link for your `~/.bashrc` it
+**Quick start**: source `bashrc` in this repository OR create a symbolic link for your `~/.bashrc`
 
 E.g.,
 ```shell
