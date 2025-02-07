@@ -10,7 +10,7 @@ source $BASH_TOOLS_DIR/fast_travel.sh
 ##########################################
 
 # Checks if provided arguments contains a common help argument string
-function _check_help() {
+function _help_requested() {
   for arg in "$@"; do
     if [[ "$arg" == "-h" || "$arg" == "--help" || "$arg" == "-help" || "$arg" == "--h" ]]; then
       return 0  # indicate that help was requested
