@@ -39,7 +39,7 @@ shopt -s checkwinsize
 ##########################################
 
 export DEV_HOME=$HOME/dev
-export BASH_TOOLS_DIR=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
+export BASH_TOOLS_DIR=$(dirname "$(realpath "${BASH_SOURCE[0]}")")
 
 
 

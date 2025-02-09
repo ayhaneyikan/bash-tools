@@ -13,7 +13,7 @@ function _parse_conda_env() {
 
 # parse git branch for use in commandline prompt
 function _parse_git_branch() {
-  git branch 2> /dev/null | sed -n -e 's/^\* \(.*\)/\(\1\)/p'
+  git branch 2> /dev/null | sed -n -e 's/^\* \(.*\)/\(\1\) /p'
 }
 
 # function to output desired color code
@@ -41,7 +41,7 @@ function _multi_line_prompt() {
 
 # simple prompt: conda, ws, git
 function _simple_prompt() {
-  echo -e "\[\033[91m\]\$(_parse_conda_env)\[\033[96m\]\w\[\033[92m\]\$(parse_git_branch) \[\033[37m\]> "
+  echo -e "\[\033[91m\]\$(_parse_conda_env)\[\033[96m\]\w\[\033[92m\] \$(_parse_git_branch)\[\033[37m\]> "
 }
 
 
