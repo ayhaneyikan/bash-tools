@@ -8,14 +8,14 @@
 declare -A paths=(
     ["bash-tools"]="$BASH_TOOLS_DIR"
     ["development"]="$HOME/dev"
-    ["todolist-cli"]="$HOME/dev/rust/todolist-cli/"
+    ["todolist-cli"]="$HOME/dev/rust/todolist-cli"
 )
 
 # define shortcut aliases for each fast travel point
 declare -A path_aliases=(
-    ["bash-tools"]="bt bashtools bash-tools"
-    ["development"]="d dev development"
-    ["todolist-cli"]="todo todolist todolist-cli"
+    ["bash-tools"]="bt bash-tools"
+    ["development"]="d development"
+    ["todolist-cli"]="todo todolist-cli"
 )
 
 # dynamically create map of aliases to fast travel points
@@ -45,6 +45,7 @@ _build_location_map
 function _show_shortcuts() {
     echo "Available shortcuts:"
     echo "-------------------"
+    printf "%-40s -> %s\n" "<number>" "cd up that many directories"
     for path_key in "${!paths[@]}"; do
         printf "%-40s -> %s\n" "${path_aliases[$path_key]}" "${paths[$path_key]}"
     done
@@ -120,18 +121,38 @@ function _get_path() {
 # centralized path resolution and error handling
 function _resolve_path() {
     local shortcut=$1
-    local path=$(_get_path "$shortcut")
 
-    # exit early if invalid shortcut
-    if [[ -z "$path" ]]; then
-        echo "Error: Unknown location '$shortcut'"
-        echo
-        _show_shortcuts
-        return 1
+    # if the argument is a number, go back that many directories
+    if [[ "$1" =~ ^[0-9]+$ ]]; then
+        local path=$(_create_cd_path "$1")
+    else
+        local path=$(_get_path "$shortcut")
+
+        # exit early if invalid shortcut
+        if [[ -z "$path" ]]; then
+            echo "Error: Unknown location '$shortcut'"
+            echo
+            _show_shortcuts
+            return 1
+        fi
     fi
 
     echo "$path"
     return 0
+}
+
+# cd back the given number of dirs
+function _create_cd_path() {
+    local steps=$1
+    local current_dir=$(pwd)
+
+    # Check if steps is greater than 0 and handle moving backwards
+    while [[ $steps -gt 0 && "$current_dir" != "/" ]]; do
+        current_dir=$(dirname "$current_dir")
+        ((steps--))
+    done
+
+    echo "$current_dir"
 }
 
 
