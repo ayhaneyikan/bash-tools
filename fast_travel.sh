@@ -43,8 +43,6 @@ _build_location_map
 
 # display available shortcuts to fast travel points
 function _show_shortcuts() {
-    echo "Available shortcuts:"
-    echo "-------------------"
     printf "%-40s -> %s\n" "<number>" "cd up that many directories"
     for path_key in "${!paths[@]}"; do
         printf "%-40s -> %s\n" "${path_aliases[$path_key]}" "${paths[$path_key]}"
