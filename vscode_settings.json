@@ -1,0 +1,52 @@
+{
+  "vim.insertModeKeyBindings": [
+    {
+      "before": ["j", "j"],
+      "after": ["<Esc>"]
+    },
+    {
+      "before": ["j", "k"],
+      "after": ["<Esc>"]
+    },
+    {
+      "before": ["k", "j"],
+      "after": ["<Esc>"]
+    },
+  ],
+  "vim.leader": "<space>",
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["<C-n>"],
+      "commands": [":nohl"]
+    },
+    {
+      "before": ["K"],
+      "commands": ["lineBreakInsert"],
+      "silent": true
+    }
+  ],
+  "vim.handleKeys": {
+    "<C-a>": false, // select all
+    "<C-f>": false, // find
+    "<C-h>": false, // find and replace
+    "<C-p>": false, // vscode quick open file
+  },
+  // // To improve performance
+  // "extensions.experimental.affinity": {
+  //   "vscodevim.vim": 1
+  // },
+
+  "workbench.colorTheme": "Monokai Pro",
+  "workbench.iconTheme": "Monokai Pro Icons",
+  "vim.smartRelativeLine": true,
+  "files.autoSave": "afterDelay",
+  "files.trimTrailingWhitespace": true,
+  "files.trimFinalNewlines": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "editor.fontFamily": "'FantasqueSansM Nerd Font Mono', Consolas, 'Courier New', monospace",
+  "editor.renderWhitespace": "all",
+  "editor.cursorSurroundingLines": 10, // equivalent of vim 'scrolloff'
+  "editor.formatOnSave": true,
+  "editor.minimap.enabled": false, // disable minimap next to scrollbar
+  "editor.rulers": [80, 120],
+}
