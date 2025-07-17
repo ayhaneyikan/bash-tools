@@ -16,6 +16,11 @@
   "vim.leader": "<space>",
   "vim.normalModeKeyBindingsNonRecursive": [
     {
+      // deletes a function call and all its args; e.g., example_func(arg1, arg2)
+      "before": ["<leader>", "d", "w"],
+      "after": ["d", "w", "d", "i", "(", "h", "2", "x"]
+    },
+    {
       "before": ["<C-n>"],
       "commands": [":nohl"]
     },
@@ -50,3 +55,4 @@
   "editor.minimap.enabled": false, // disable minimap next to scrollbar
   "editor.rulers": [80, 120],
 }
+
