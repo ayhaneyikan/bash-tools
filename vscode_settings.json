@@ -16,9 +16,15 @@
   "vim.leader": "<space>",
   "vim.normalModeKeyBindingsNonRecursive": [
     {
+      // deletes into the underscore register (without yank) and pastes
+      // this preserves your data in the paste register
+      "before": ["<leader>", "p"],
+      "after": ["\"", "_", "d", "P"]
+    },
+    {
       // deletes a function call and all its args; e.g., example_func(arg1, arg2)
       "before": ["<leader>", "d", "w"],
-      "after": ["d", "w", "d", "i", "(", "h", "2", "x"]
+      "after": ["d", "i", "w", "d", "a", "("]
     },
     {
       "before": ["<C-n>"],
